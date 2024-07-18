@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.stopwatch-section{
+    background-color: #5586ac;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+}
+.stopwatch-wrp{
+    background: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+
+.digit{
+    font-size: 45px;
+    color: #fff;
+    width: 55px;
+    display: inline-block;
+}
+.txt{
+    font-size: 25px;
+    color: #fff;
+    font-weight: 300;
+    margin-right: 10px
+}
+
+@media all and (max-width: 576px){
+    .stopwatch-wrp h2{font-size: 25px;}
+}

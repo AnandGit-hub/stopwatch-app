@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Anand Stopwatch</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+</head>
+ 
+<body>
+	<div class="container-fluid stopwatch-section">
+		<div class="container">
+			<div class="col-lg-6 mx-auto shadow-lg p-lg-5 p-4 stopwatch-wrp">
+				<div class="text-center text-white mx-auto py-3 border-bottom">
+					<h1 class="font-weight-bold">Stopwatch</h1>
+					<h2 class="font-weight-light">Start, Stop & Lap</h2>
+				</div>
+				<div class="mx-auto py-3 border-bottom">
+					<div class="d-flex flex-wrap justify-content-center" id="time" >
+						<div class="text-center">
+							<span class="digit" id="hr">00</span>
+							<span class="txt">Hr</span>
+						</div>
+						<div class="text-center">
+							<span class="digit" id="min">00</span>
+							<span class="txt">Min</span>
+						</div>
+						<div class="text-center">
+							<span class="digit" id="sec">00</span>
+							<span class="txt">Sec</span>
+						</div>
+						<div class="text-center">
+							<span class="digit" id="count">00</span>
+							<span class="txt">Ms</span>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex flex-wrap mt-3 justify-content-center">
+					<button class="btn btn-success border-0 px-4 m-3" id="startBtn">Start</button>
+					<button class="btn btn-secondary border-0 px-4 m-3" id="stopBtn">Stop</button>
+					<button class="btn btn-danger border-0 px-4 m-3" id="resetBtn">Reset</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let startBtn = document.getElementById('startBtn');
+        let stopBtn = document.getElementById('stopBtn');
+        let resetBtn = document.getElementById('resetBtn');
+ 
+        let hour = 0;
+        let minute = 0;
+        let second = 0;
+        let count = 0;
+        let timer;
+ 
+        startBtn.addEventListener('click', function () {
+            // Check if timer is not already running
+            if (!timer) {
+                timer = setInterval(stopWatchTimer, 10);
+            }
+        });
+ 
+        stopBtn.addEventListener('click', function () {
+            clearInterval(timer);
+            timer = null; // Reset timer variable
+        });
+		
+		function updateTimer() {
+            document.getElementById('hr').textContent =
+                hour.toString().padStart(2, '0'); //padStart to add one "0" if there is single digit
+            document.getElementById('min').textContent =
+                minute.toString().padStart(2, '0');//padStart to add one "0" if there is single digit
+            document.getElementById('sec').textContent =
+                second.toString().padStart(2, '0');//padStart to add one "0" if there is single digit
+            document.getElementById('count').textContent =
+                count.toString().padStart(2, '0');//padStart to add one "0" if there is single digit
+        }
+
+        resetBtn.addEventListener('click', function () {
+            clearInterval(timer);
+            timer = null; // Reset timer variable
+            hour = 0;
+            minute = 0;
+            second = 0;
+            count = 0;
+            updateTimer();
+        });
+
+        function stopWatchTimer() {
+            count++;
+            if (count == 100) { // count reaches to 100
+                second++; // +1 to second
+                count = 0; // count starts from 0
+            }
+            if (second == 60) { // second reaches to 60
+                minute++; // +1 to Minute
+                second = 0; // count starts from 0
+            }
+            if (minute == 60) { // Minute reaches to 60
+                hour++; // +1 to Hour
+                minute = 0; // Minute starts from 0
+                second = 0; // second starts from 0
+            }
+            updateTimer();
+        }
+    </script>
+	
+</body>
+ 
+</html>
